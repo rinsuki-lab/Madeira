@@ -12,5 +12,11 @@ jobs:
        submodules: recursive
     - working-directory: FEX/
       run: |
-        cmake -Bbuild-ios -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_ARCHITECTURES=arm64 -DCMAKE_OSX_DEPLOYMENT_TARGET=17.0 .
+        cmake -Bbuild-ios \
+          -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_ARCHITECTURES=arm64 \
+          -DCMAKE_OSX_DEPLOYMENT_TARGET=17.0 \
+          -DCMAKE_SYSTEM_PROCESSOR=arm64 \
+          -DBUILD_TESTING=OFF \
+          -DTUNE_CPU=apple-a17 \
+          .
         cmake --build build-ios --config Release
