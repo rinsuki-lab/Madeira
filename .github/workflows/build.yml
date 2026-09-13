@@ -1,0 +1,16 @@
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: macOS-26
+    steps:
+    - uses: actions/checkout@v7
+      with:
+       submodules: recursive
+    - working-directory: FEX/
+      run: |
+        cmake -Bbuild-ios -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_ARCHITECTURES=arm64 -DCMAKE_OSX_DEPLOYMENT_TARGET=17.0 .
+        cmake --build build-ios --config Release
